@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Snowflake } from 'lucide-react';
 
@@ -147,10 +148,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </div>
         
         <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 font-medium">
-          <div className={`text-sm md:text-base ${isDayMode ? 'text-gray-600' : 'text-gray-300'}`}>
+          <div className={`text-base md:text-xl ${isDayMode ? 'text-gray-600' : 'text-gray-300'}`}>
             Les Saisies
           </div>
-          <div className={`text-xs md:text-sm font-bold ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`} style={{
+          <div className={`text-sm md:text-lg font-bold ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`} style={{
             textShadow: isDayMode ? '0 0 8px rgba(96, 240, 214, 0.5)' : '0 0 8px rgba(255, 45, 149, 0.5)',
             letterSpacing: '1px'
           }}>
