@@ -32,7 +32,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         style={{
           backgroundImage: isDayMode 
             ? 'url("https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=1920&h=1080")'
-            : 'url("https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?auto=format&fit=crop&w=1920&h=1080")'
+            : 'url("https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&h=1080")'
         }}
       />
       
