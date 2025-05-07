@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import ConceptSection from '../components/ConceptSection';
@@ -11,22 +11,7 @@ import Footer from '../components/Footer';
 const Index = () => {
   const [isDayMode, setIsDayMode] = useState<boolean>(true);
   
-  // Automatically transition to night mode when user scrolls past hero section
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      if (scrollPosition > windowHeight * 0.75) {
-        setIsDayMode(false);
-      } else {
-        setIsDayMode(true);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Removed the automatic transition to night mode when scrolling past hero section
   
   // Manual toggle function for the day/night toggle button
   const toggleDayNight = () => {
