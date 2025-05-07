@@ -26,6 +26,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
           : 'linear-gradient(to bottom, #0D1B2A 0%, #8E44AD 100%)'
       }}
     >
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-50"
+        style={{
+          backgroundImage: isDayMode 
+            ? 'url("https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&h=1080")'
+            : 'url("https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&h=1080")'
+        }}
+      />
+      
       {/* Background Effects */}
       {showSnowflakes && isDayMode && (
         <div className="absolute inset-0 z-0">
