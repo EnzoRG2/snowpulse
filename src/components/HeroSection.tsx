@@ -28,7 +28,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
     >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-60" // Further reduced opacity for darker effect
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40" // Further reduced opacity for darker effect
         style={{
           backgroundImage: isDayMode 
             ? 'url("https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=1920&h=1080")'
