@@ -160,7 +160,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
             Les Saisies
           </div>
           <div 
-            className="text-sm md:text-lg font-extrabold text-green-500" 
+            className={`text-sm md:text-lg font-extrabold ${
+              isDayMode ? 'text-day-turquoise' : 'text-night-pink'
+            }`}
             style={{
               textShadow: isDayMode 
                 ? '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4)' 
