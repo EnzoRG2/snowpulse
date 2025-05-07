@@ -95,7 +95,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </h1>
         
         <h2 className={`text-xl md:text-2xl font-medium max-w-2xl mx-auto mb-8 ${
-          isDayMode ? 'text-day-gray' : 'text-white/80'
+          isDayMode 
+            ? 'text-night-blue font-semibold drop-shadow-md' 
+            : 'text-white font-semibold drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]'
         }`}>
           {isDayMode ? (
             "L'adrénaline du snow freestyle en journée."
