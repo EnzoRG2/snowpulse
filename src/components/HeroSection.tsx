@@ -28,7 +28,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
     >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-50"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-80"
         style={{
           backgroundImage: isDayMode 
             ? 'url("https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=1920&h=1080")'
@@ -52,28 +52,28 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
             >
               <Snowflake
                 size={10 + Math.random() * 20}
-                className="text-white opacity-80"
+                className="text-white opacity-60"
               />
             </div>
           ))}
         </div>
       )}
       
-      {/* Night stars */}
+      {/* Night stars - more subtle */}
       {!isDayMode && (
         <div className="absolute inset-0 z-0">
-          {[...Array(50)].map((_, i) => (
+          {[...Array(40)].map((_, i) => (
             <div
               key={`star-${i}`}
               className="absolute rounded-full"
               style={{
-                width: `${Math.random() * 3}px`,
-                height: `${Math.random() * 3}px`,
+                width: `${Math.random() * 2}px`,
+                height: `${Math.random() * 2}px`,
                 backgroundColor: 'white',
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 60}%`,
-                opacity: 0.4 + Math.random() * 0.6,
-                animation: `pulse ${2 + Math.random() * 4}s ease-in-out infinite`,
+                opacity: 0.3 + Math.random() * 0.4,
+                animation: `pulse ${3 + Math.random() * 3}s ease-in-out infinite`,
                 animationDelay: `${Math.random() * 2}s`,
               }}
             />
@@ -83,13 +83,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
 
       {/* Hero Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="font-orbitron text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 tracking-tighter">
-          <div className="relative inline-block" data-text="SNOW">
+        <h1 className="font-orbitron text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight">
+          <div className="relative inline-block">
             <span className={`relative z-10 ${isDayMode ? 'text-day-gray' : 'text-white'}`}>SNOW</span>
           </div>
-          <div className={`relative inline-block mt-2 ${isDayMode ? 'glitch-effect' : ''}`} data-text="PULSE">
+          <div className="relative inline-block mt-2">
             <span className={`relative z-10 ${
-              isDayMode ? 'title-gradient-day' : 'title-gradient-night'
+              isDayMode ? 'text-day-turquoise' : 'text-night-pink'
             }`}>PULSE</span>
           </div>
         </h1>
@@ -107,23 +107,27 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         <div className="relative flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
           <a 
             href="#tickets" 
-            className={`snow-pulse-button ${isDayMode ? 'snow-pulse-button-day' : 'snow-pulse-button-night'} z-10`}
+            className={`px-6 py-3 rounded-md font-medium transition-all duration-300 ${
+              isDayMode 
+                ? 'bg-day-turquoise text-white hover:bg-day-blue hover:shadow-md' 
+                : 'bg-night-pink text-white hover:bg-night-purple hover:shadow-md'
+            }`}
           >
             Réserver maintenant
           </a>
           <a 
             href="#program" 
-            className={`z-10 px-6 py-3 rounded-md font-bold transition-colors duration-300 ${
+            className={`z-10 px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
               isDayMode 
-                ? 'text-day-gray hover:text-night-blue' 
-                : 'text-white/80 hover:text-white'
+                ? 'text-day-gray hover:text-night-blue border border-day-gray hover:border-night-blue' 
+                : 'text-white/80 hover:text-white border border-white/30 hover:border-white'
             }`}
           >
             Voir le programme
           </a>
         </div>
         
-        <div className={`absolute bottom-12 left-0 right-0 flex justify-center animate-pulse-slow ${
+        <div className={`absolute bottom-12 left-0 right-0 flex justify-center ${
           isDayMode ? 'text-day-gray' : 'text-white/80'
         }`}>
           <a href="#concept">
@@ -136,15 +140,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
               stroke="currentColor" 
               strokeWidth="2" 
               strokeLinecap="round" 
-              strokeLinejoin="round" 
-              className="animate-bounce"
+              strokeLinejoin="round"
             >
               <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
             </svg>
           </a>
         </div>
         
-        <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 font-orbitron font-bold">
+        <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 font-medium">
           <div className={`text-sm md:text-base ${isDayMode ? 'text-day-gray' : 'text-white/80'}`}>
             Les Saisies
           </div>

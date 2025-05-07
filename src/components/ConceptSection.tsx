@@ -14,8 +14,8 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
     >
       <div className="section-container">
         <div className="text-center mb-16">
-          <h2 className={`font-orbitron text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ${
-            isDayMode ? 'text-night-blue' : 'title-gradient-night'
+          <h2 className={`font-medium text-3xl md:text-4xl lg:text-5xl mb-4 ${
+            isDayMode ? 'text-night-blue' : 'text-white'
           }`}>
             UN FESTIVAL UNIQUE
           </h2>
@@ -52,12 +52,12 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
         
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <div className="md:w-1/2">
-            <div className={`rounded-2xl overflow-hidden shadow-xl ${
-              isDayMode ? 'bg-gradient-to-br from-day-blue/20 to-day-turquoise/20 shadow-day-blue/20' : 
-              'bg-gradient-to-br from-night-purple/20 to-night-pink/20 shadow-night-purple/20'
+            <div className={`rounded-lg overflow-hidden shadow-md ${
+              isDayMode ? 'bg-gradient-to-br from-day-blue/10 to-day-turquoise/10 shadow-day-blue/10' : 
+              'bg-gradient-to-br from-night-purple/10 to-night-pink/10 shadow-night-purple/10'
             }`}>
               <div className="p-6 md:p-8">
-                <h3 className={`font-orbitron text-xl md:text-2xl font-bold mb-4 ${
+                <h3 className={`font-medium text-xl md:text-2xl mb-4 ${
                   isDayMode ? 'text-night-blue' : 'text-white'
                 }`}>
                   Notre Vision
@@ -80,7 +80,7 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
           </div>
           
           <div className="md:w-1/2 space-y-6">
-            <h3 className={`font-orbitron text-xl md:text-2xl font-bold ${
+            <h3 className={`font-medium text-xl md:text-2xl ${
               isDayMode ? 'text-night-blue' : 'text-white'
             }`}>
               L'expérience Snow Pulse
@@ -101,7 +101,7 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
                   <div className={`mr-3 mt-1 min-w-4 ${
                     isDayMode ? 'text-day-turquoise' : 'text-night-pink'
                   }`}>
-                    ✓
+                    •
                   </div>
                   <span>{item}</span>
                 </li>
@@ -109,7 +109,11 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
             </ul>
             <a 
               href="#program" 
-              className={`inline-block snow-pulse-button ${isDayMode ? 'snow-pulse-button-day' : 'snow-pulse-button-night'} mt-4`}
+              className={`inline-block px-6 py-3 rounded-md transition-all duration-300 ${
+                isDayMode 
+                  ? 'bg-day-turquoise text-white hover:bg-day-blue' 
+                  : 'bg-night-pink text-white hover:bg-night-purple'
+              }`}
             >
               Voir le programme
             </a>
@@ -131,20 +135,20 @@ interface FeatureCardProps {
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, isDayMode, delay }) => {
   return (
     <div 
-      className={`rounded-xl p-6 md:p-8 transition-transform duration-300 transform hover:-translate-y-1 opacity-0 animate-fade-in ${delay} ${
+      className={`rounded-lg p-6 md:p-8 transition-all duration-300 opacity-0 animate-fade-in ${delay} ${
         isDayMode 
-          ? 'bg-gradient-to-br from-white to-day-blue/10 shadow-md' 
-          : 'bg-gradient-to-br from-night-blue to-night-purple/20 shadow-md'
+          ? 'bg-gradient-to-br from-white to-day-blue/5 shadow-md' 
+          : 'bg-gradient-to-br from-night-blue to-night-purple/10 shadow-md'
       }`}
     >
       <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
         isDayMode 
-          ? 'bg-day-turquoise/20 text-day-turquoise' 
-          : 'bg-night-pink/20 text-night-pink'
+          ? 'bg-day-turquoise/10 text-day-turquoise' 
+          : 'bg-night-pink/10 text-night-pink'
       }`}>
         {icon}
       </div>
-      <h3 className={`font-orbitron text-xl font-bold mb-2 ${
+      <h3 className={`font-medium text-xl mb-2 ${
         isDayMode ? 'text-night-blue' : 'text-white'
       }`}>
         {title}

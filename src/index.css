@@ -99,60 +99,27 @@
 
 @layer components {
   .title-gradient-day {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-day-blue via-day-turquoise to-day-blue;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-day-blue to-day-turquoise;
   }
   
   .title-gradient-night {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-night-purple via-night-pink to-night-orange;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-night-purple to-night-pink;
   }
   
   .snow-pulse-button {
-    @apply relative overflow-hidden rounded-md px-6 py-3 font-bold transition-all duration-300 hover:shadow-lg;
-  }
-  
-  .snow-pulse-button::before {
-    @apply absolute inset-0 content-[""] opacity-0 transition-opacity duration-300;
-  }
-  
-  .snow-pulse-button:hover::before {
-    @apply opacity-100;
+    @apply relative overflow-hidden rounded-md px-6 py-3 font-medium transition-all duration-300 hover:shadow-md;
   }
   
   .snow-pulse-button-day {
-    @apply bg-day-turquoise text-night-blue shadow-md;
-  }
-  
-  .snow-pulse-button-day::before {
-    @apply bg-gradient-to-r from-day-blue to-day-turquoise;
+    @apply bg-day-turquoise text-white;
   }
   
   .snow-pulse-button-night {
-    @apply bg-night-pink text-white shadow-md;
+    @apply bg-night-pink text-white;
   }
   
-  .snow-pulse-button-night::before {
-    @apply bg-gradient-to-r from-night-purple to-night-pink;
-  }
-  
-  .glitch-effect {
-    @apply relative;
-  }
-  
-  .glitch-effect::before,
-  .glitch-effect::after {
-    @apply absolute content-[attr(data-text)] left-0 text-white opacity-70;
-  }
-  
-  .glitch-effect::before {
-    @apply -top-[2px] animate-glitch text-night-pink;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    animation-delay: -0.1s;
-  }
-  
-  .glitch-effect::after {
-    @apply -bottom-[2px] animate-glitch text-day-turquoise;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-    animation-delay: -0.2s;
+  .animate-pulse-slow {
+    animation: pulse 4s ease-in-out infinite;
   }
 }
 
@@ -182,4 +149,43 @@
 
 .animate-delay-800 {
   animation-delay: 800ms;
+}
+
+@keyframes pulse {
+  '0%, 100%': { 
+    opacity: '0.9',
+    transform: 'scale(1)',
+  },
+  '50%': { 
+    opacity: '0.7',
+    transform: 'scale(1.02)',
+  },
+}
+
+@keyframes snowfall {
+  '0%': { 
+    transform: 'translateY(0) translateX(0)',
+    opacity: '0',
+  },
+  '10%': {
+    opacity: '0.8',
+  },
+  '90%': {
+    opacity: '0.8',
+  },
+  '100%': { 
+    transform: 'translateY(100vh) translateX(50px)',
+    opacity: '0',
+  },
+}
+
+@keyframes fade-in {
+  '0%': {
+    opacity: '0',
+    transform: 'translateY(10px)'
+  },
+  '100%': {
+    opacity: '1',
+    transform: 'translateY(0)'
+  }
 }
