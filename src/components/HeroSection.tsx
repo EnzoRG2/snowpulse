@@ -22,13 +22,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
       className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{
         backgroundImage: isDayMode
-          ? 'linear-gradient(to bottom, #96C5E1 0%, #FFFFFF 100%)' // Darker blue for day mode
-          : 'linear-gradient(to bottom, #071525 0%, #722F8A 100%)' // Darker night mode gradient
+          ? 'linear-gradient(to bottom, #6A9CBF 0%, #E0F0FF 100%)' // Even darker blue for day mode
+          : 'linear-gradient(to bottom, #03070E 0%, #4A1F5A 100%)' // Darker night mode gradient
       }}
     >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-70" // Reduced opacity for darker effect
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-60" // Further reduced opacity for darker effect
         style={{
           backgroundImage: isDayMode 
             ? 'url("https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=1920&h=1080")'
