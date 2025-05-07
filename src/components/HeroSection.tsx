@@ -22,13 +22,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
       className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{
         backgroundImage: isDayMode
-          ? 'linear-gradient(to bottom, #C7EFFF 0%, #FFFFFF 100%)'
-          : 'linear-gradient(to bottom, #0D1B2A 0%, #8E44AD 100%)'
+          ? 'linear-gradient(to bottom, #96C5E1 0%, #FFFFFF 100%)' // Darker blue for day mode
+          : 'linear-gradient(to bottom, #071525 0%, #722F8A 100%)' // Darker night mode gradient
       }}
     >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-80"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-70" // Reduced opacity for darker effect
         style={{
           backgroundImage: isDayMode 
             ? 'url("https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=1920&h=1080")'
@@ -95,10 +95,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </h1>
         
         <h2 className={`text-xl md:text-2xl font-medium max-w-2xl mx-auto mb-8 ${
-          isDayMode 
-            ? 'text-night-blue font-semibold drop-shadow-md' 
-            : 'text-white font-semibold drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]'
-        }`}>
+          isDayMode ? 'text-day-gray' : 'text-white/80'
+        } drop-shadow-md`}>
           {isDayMode ? (
             "L'adrénaline du snow freestyle en journée."
           ) : (
