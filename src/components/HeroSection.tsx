@@ -152,14 +152,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
             Les Saisies
           </div>
           <div 
-            className={`text-sm md:text-lg font-extrabold ${isDayMode ? 'bg-white/80 text-day-turquoise' : 'bg-black/50 text-night-pink'}`} 
+            className={`text-sm md:text-lg font-extrabold ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`} 
             style={{
               textShadow: isDayMode 
-                ? '1px 1px 3px rgba(96, 240, 214, 0.8), -1px -1px 3px rgba(0, 0, 0, 0.3)' 
-                : '1px 1px 3px rgba(255, 45, 149, 0.8), -1px -1px 3px rgba(0, 0, 0, 0.5)',
+                ? '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(96, 240, 214, 0.8), 0 0 20px rgba(96, 240, 214, 0.4)' 
+                : '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 45, 149, 0.8), 0 0 20px rgba(255, 45, 149, 0.4)',
               letterSpacing: '1.2px',
               padding: '2px 6px',
-              borderRadius: '4px'
             }}
           >
             10-12 MARS 2025
