@@ -31,8 +31,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-50"
         style={{
           backgroundImage: isDayMode 
-            ? 'url("https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&h=1080")'
-            : 'url("https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&h=1080")'
+            ? 'url("https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=1920&h=1080")'
+            : 'url("https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?auto=format&fit=crop&w=1920&h=1080")'
         }}
       />
       
@@ -59,6 +59,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </div>
       )}
       
+      {/* Night stars */}
       {!isDayMode && (
         <div className="absolute inset-0 z-0">
           {[...Array(50)].map((_, i) => (
