@@ -85,7 +85,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
       <div className="relative z-10 container mx-auto px-4 text-center">
         <h1 className="font-orbitron text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight">
           <div className="relative inline-block">
-            <span className={`relative z-10 ${isDayMode ? 'text-day-gray' : 'text-white'}`}>SNOW</span>
+            <span className={`relative z-10 ${isDayMode ? 'text-gray-600' : 'text-white'}`}>SNOW</span>
           </div>
           <div className="relative inline-block mt-2">
             <span className={`relative z-10 ${
@@ -95,7 +95,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </h1>
         
         <h2 className={`text-xl md:text-2xl font-medium max-w-2xl mx-auto mb-8 ${
-          isDayMode ? 'text-day-gray' : 'text-white/80'
+          isDayMode ? 'text-gray-700' : 'text-gray-200'
         } drop-shadow-md`}>
           {isDayMode ? (
             "L'adrénaline du snow freestyle en journée."
@@ -119,8 +119,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
             href="#program" 
             className={`z-10 px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
               isDayMode 
-                ? 'text-day-gray hover:text-night-blue border border-day-gray hover:border-night-blue' 
-                : 'text-white/80 hover:text-white border border-white/30 hover:border-white'
+                ? 'text-gray-600 hover:text-night-blue border border-gray-500 hover:border-night-blue' 
+                : 'text-gray-300 hover:text-white border border-gray-400 hover:border-white'
             }`}
           >
             Voir le programme
@@ -128,7 +128,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </div>
         
         <div className={`absolute bottom-12 left-0 right-0 flex justify-center ${
-          isDayMode ? 'text-day-gray' : 'text-white/80'
+          isDayMode ? 'text-gray-600' : 'text-gray-300'
         }`}>
           <a href="#concept">
             <svg 
@@ -148,7 +148,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </div>
         
         <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 font-medium">
-          <div className={`text-sm md:text-base ${isDayMode ? 'text-day-gray' : 'text-white/80'}`}>
+          <div className={`text-sm md:text-base ${isDayMode ? 'text-gray-600' : 'text-gray-300'}`}>
             Les Saisies
           </div>
           <div className={`text-xs md:text-sm ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`}>
