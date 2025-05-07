@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Snowflake } from 'lucide-react';
 
@@ -148,11 +149,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         
         <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 font-medium">
           <div 
-            className={`text-base md:text-xl font-extrabold ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`}
+            className={`text-base md:text-xl font-extrabold ${isDayMode ? 'text-gray-600' : 'text-gray-300'}`}
             style={{
               textShadow: isDayMode 
-                ? '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(96, 240, 214, 0.8), 0 0 20px rgba(96, 240, 214, 0.4)' 
-                : '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 45, 149, 0.8), 0 0 20px rgba(255, 45, 149, 0.4)',
+                ? '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4)' 
+                : '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4)',
               letterSpacing: '1.2px',
               padding: '2px 6px',
             }}
@@ -160,11 +161,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
             Les Saisies
           </div>
           <div 
-            className={`text-sm md:text-lg font-extrabold ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`} 
+            className={`text-sm md:text-lg font-extrabold ${isDayMode ? 'text-gray-600' : 'text-gray-300'}`} 
             style={{
               textShadow: isDayMode 
-                ? '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(96, 240, 214, 0.8), 0 0 20px rgba(96, 240, 214, 0.4)' 
-                : '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 45, 149, 0.8), 0 0 20px rgba(255, 45, 149, 0.4)',
+                ? '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4)' 
+                : '2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4)',
               letterSpacing: '1.2px',
               padding: '2px 6px',
             }}
