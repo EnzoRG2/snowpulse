@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Snowflake, Disc3, ArrowDown, ArrowUp } from 'lucide-react';
 
@@ -7,10 +6,10 @@ interface ProgramSectionProps {
 }
 
 const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
-  const [activeDay, setActiveDay] = useState<'vendredi' | 'samedi' | 'dimanche'>('vendredi');
+  const [activeDay, setActiveDay] = useState<'jeudi' | 'vendredi' | 'samedi' | 'dimanche'>('jeudi');
   const [activeSport, setActiveSport] = useState(true);
   
-  const days = ['vendredi', 'samedi', 'dimanche'] as const;
+  const days = ['jeudi', 'vendredi', 'samedi', 'dimanche'] as const;
   
   return (
     <section 
@@ -31,7 +30,7 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
           <p className={`max-w-2xl mx-auto text-lg ${
             isDayMode ? 'text-day-gray' : 'text-white/80'
           }`}>
-            Trois jours intenses de compétitions et performances du 10 au 12 mars 2025
+            Découvrez le planning détaillé du festival. Les dates mentionnées (10-12 Mars) concernent les jours principaux de compétition.
           </p>
         </div>
         
@@ -77,7 +76,7 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                 }`}
               >
                 <Snowflake size={16} className="mr-2" />
-                Sports (10h-16h30)
+                Activités Journée
               </button>
               <button
                 onClick={() => setActiveSport(false)}
@@ -92,13 +91,13 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                 }`}
               >
                 <Disc3 size={16} className="mr-2" />
-                Musique (17h-2h)
+                Soirées & Festivités
               </button>
             </div>
           </div>
           
           <div>
-            {activeSport ? (
+            {activeSport ? ( // Activités Journée
               <div>
                 <div className={`rounded-xl p-6 md:p-8 mb-6 ${
                   isDayMode 
@@ -108,74 +107,106 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                   <h3 className={`font-orbitron text-xl font-bold mb-4 ${
                     isDayMode ? 'text-night-blue' : 'text-white'
                   }`}>
-                    Programme Sports - {activeDay.charAt(0).toUpperCase() + activeDay.slice(1)}
+                    Programme Journée - {activeDay.charAt(0).toUpperCase() + activeDay.slice(1)}
                   </h3>
                   
                   <div className="space-y-6">
+                    {activeDay === 'jeudi' && (
+                      <>
+                        <TimelineItem 
+                          time="16h00 - 22h00" 
+                          title="Accueil et Installation" 
+                          description="Arrivée des premiers bus, check-in, remise des forfaits, installation dans les hébergements partenaires."
+                          isDayMode={isDayMode}
+                        />
+                        <TimelineItem 
+                          time="Après-midi / Soirée" 
+                          title="Animation & Convivialité" 
+                          description="Petite animation musicale sur la place centrale et vin chaud offert."
+                          isDayMode={isDayMode}
+                        />
+                      </>
+                    )}
                     {activeDay === 'vendredi' && (
                       <>
                         <TimelineItem 
-                          time="10h-12h" 
-                          title="Qualifications ski freestyle" 
-                          description="Big air et slopestyle"
+                          time="8h00 - 11h00" 
+                          title="Qualifications Ski Compétition (PISTE)" 
+                          description="Sessions sur les modules du snowpark, juges sur place et DJ set pour ambiancer les riders."
                           isDayMode={isDayMode}
                         />
                         <TimelineItem 
-                          time="13h-15h" 
-                          title="Qualifications snowboard freestyle" 
-                          description="Big air et slopestyle"
+                          time="11h30 - 13h30" 
+                          title="Pause Déjeuner & Animations Village" 
+                          description="Stands, foodtrucks, DJ soft."
                           isDayMode={isDayMode}
                         />
                         <TimelineItem 
-                          time="15h30-16h30" 
-                          title="Course de vélo sur neige amateur" 
-                          description="Qualifications"
+                          time="14h00 - 15h45" 
+                          title="Snowpark" 
+                          description="Sessions libres et animations."
+                          isDayMode={isDayMode}
+                        />
+                         <TimelineItem 
+                          time="16h00 - 17h30" 
+                          title="Premiers Tours Courses de Luges" 
+                          description="Différents départs (piste réservée)."
                           isDayMode={isDayMode}
                         />
                       </>
                     )}
-                    
                     {activeDay === 'samedi' && (
                       <>
                         <TimelineItem 
-                          time="10h-12h" 
-                          title="Demi-finales ski freestyle" 
-                          description="Les meilleurs des qualifications s'affrontent"
+                          time="10h00 - 12h00" 
+                          title="Ski Freestyle" 
+                          description="Compétitions et démonstrations."
                           isDayMode={isDayMode}
                         />
                         <TimelineItem 
-                          time="13h-15h" 
-                          title="Compétitions snow freestyle" 
-                          description="Demi-finales"
+                          time="12h00 - 13h00" 
+                          title="Pause Déjeuner & Mini-Concert" 
+                          description="Sur la terrasse principale."
                           isDayMode={isDayMode}
                         />
                         <TimelineItem 
-                          time="15h30-16h30" 
-                          title="Finale vélo sur neige" 
-                          description="Catégories pro et amateur"
+                          time="13h00 - 15h00" 
+                          title="Slalom" 
+                          description="Présence des meilleurs riders, animation micro, interviews entre les manches."
+                          isDayMode={isDayMode}
+                        />
+                        <TimelineItem 
+                          time="15h30 - 16h30" 
+                          title="GRANDE FINALE DES COURSES DE LUGE 🛷🔥" 
+                          description="Parcours agrandi et chronométré, finale en duel sur écran géant, ambiance survoltée ! Trophée remis sur le podium."
                           isDayMode={isDayMode}
                         />
                       </>
                     )}
-                    
                     {activeDay === 'dimanche' && (
                       <>
                         <TimelineItem 
-                          time="10h-12h" 
-                          title="Finales ski freestyle" 
-                          description="Les meilleurs s'affrontent pour le Cash Prize"
+                          time="10h00 - 12h00" 
+                          title="Finales Techniques (Ski & Snowboard Cross)" 
+                          description="Les meilleures épreuves pour déterminer les champions."
                           isDayMode={isDayMode}
                         />
                         <TimelineItem 
-                          time="13h-15h" 
-                          title="Finales snowboard freestyle" 
-                          description="Dernière chance de remporter le Cash Prize"
+                          time="12h00 - 13h00" 
+                          title="Brunch Montagnard Géant & Jeux Concours" 
+                          description="Sur scène, avec de nombreux lots à gagner."
                           isDayMode={isDayMode}
                         />
                         <TimelineItem 
-                          time="15h30-16h30" 
-                          title="Boardercross exhibition" 
-                          description="Avec athlètes invités"
+                          time="13h00 - 15h00" 
+                          title="Session Freestyle Libre & Best Trick" 
+                          description="Ambiance fun, riders invités à lâcher leurs meilleures figures."
+                          isDayMode={isDayMode}
+                        />
+                        <TimelineItem 
+                          time="15h00 - 17h00" 
+                          title="Cérémonie de Clôture & Remise des Prix" 
+                          description="Podiums, photos, lots pour les gagnants (et meilleurs déguisements !), discours final, remerciements."
                           isDayMode={isDayMode}
                         />
                       </>
@@ -183,35 +214,39 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                   </div>
                 </div>
                 
-                <div className={`rounded-xl p-6 md:p-8 ${
-                  isDayMode 
-                    ? 'bg-day-turquoise/10' 
-                    : 'bg-night-purple/10'
-                }`}>
-                  <h4 className={`font-orbitron text-lg font-bold mb-2 ${
-                    isDayMode ? 'text-night-blue' : 'text-white'
+                {/* Cash Prize section - kept as is */}
+                {activeDay !== 'jeudi' && (
+                  <div className={`rounded-xl p-6 md:p-8 ${
+                    isDayMode 
+                      ? 'bg-day-turquoise/10' 
+                      : 'bg-night-purple/10'
                   }`}>
-                    Cash Prize
-                  </h4>
-                  <p className={`mb-3 ${
-                    isDayMode ? 'text-day-gray' : 'text-white/80'
-                  }`}>
-                    Budget total: 45 000€
-                  </p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <PrizeItem place="1er" amount="8 000€" isDayMode={isDayMode} />
-                    <PrizeItem place="2ème" amount="4 000€" isDayMode={isDayMode} />
-                    <PrizeItem place="3ème" amount="2 000€" isDayMode={isDayMode} />
-                    <PrizeItem place="4ème" amount="1 000€" isDayMode={isDayMode} />
+                    <h4 className={`font-orbitron text-lg font-bold mb-2 ${
+                      isDayMode ? 'text-night-blue' : 'text-white'
+                    }`}>
+                      Cash Prize
+                    </h4>
+                    <p className={`mb-3 ${
+                      isDayMode ? 'text-day-gray' : 'text-white/80'
+                    }`}>
+                      Budget total: 45 000€
+                    </p>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <PrizeItem place="1er" amount="8 000€" isDayMode={isDayMode} />
+                      <PrizeItem place="2ème" amount="4 000€" isDayMode={isDayMode} />
+                      <PrizeItem place="3ème" amount="2 000€" isDayMode={isDayMode} />
+                      <PrizeItem place="4ème" amount="1 000€" isDayMode={isDayMode} />
+                    </div>
+                    <p className={`mt-3 text-sm ${
+                      isDayMode ? 'text-day-gray' : 'text-white/70'
+                    }`}>
+                      5ème - 10ème : 500€ chacun
+                    </p>
                   </div>
-                  <p className={`mt-3 text-sm ${
-                    isDayMode ? 'text-day-gray' : 'text-white/70'
-                  }`}>
-                    5ème - 10ème : 500€ chacun
-                  </p>
-                </div>
+                )}
+
               </div>
-            ) : (
+            ) : ( // Soirées & Festivités
               <div>
                 <div className={`rounded-xl p-6 md:p-8 mb-6 ${
                   isDayMode 
@@ -221,62 +256,84 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                   <h3 className={`font-orbitron text-xl font-bold mb-4 ${
                     isDayMode ? 'text-night-blue' : 'text-white'
                   }`}>
-                    Programme Musique - {activeDay.charAt(0).toUpperCase() + activeDay.slice(1)}
+                    Soirées & Festivités - {activeDay.charAt(0).toUpperCase() + activeDay.slice(1)}
                   </h3>
                   
                   <div className="space-y-6">
-                    <TimelineItem 
-                      time="17h-19h" 
-                      title="DJ résidents locaux" 
-                      description="Warm-up par les talents de la région"
-                      isDayMode={isDayMode}
-                    />
-                    <TimelineItem 
-                      time="19h-21h" 
-                      title={activeDay === 'vendredi' ? "Artistes émergents" : "Artistes nationaux"} 
-                      description="Techno et Electro"
-                      isDayMode={isDayMode}
-                    />
-                    <TimelineItem 
-                      time="21h-2h" 
-                      title="Têtes d'affiche internationales" 
-                      description={activeDay === 'samedi' ? "3 artistes internationaux" : "2 artistes internationaux"}
-                      isDayMode={isDayMode}
-                    />
+                    {activeDay === 'jeudi' && (
+                       <p className={isDayMode ? 'text-day-gray' : 'text-white/80'}>
+                         Les festivités nocturnes débutent dès vendredi ! Profitez de l'accueil et de l'animation en place centrale.
+                       </p>
+                    )}
+                    {activeDay === 'vendredi' && (
+                      <TimelineItem 
+                        time="18h00 - 2h00" 
+                        title="Soirée Festival – Opening Night" 
+                        description="Line-up DJ & groupes live – 2 scènes (intérieure & extérieure). Ambiance ski party, bar à shots givrés, écrans géants rediffusant les meilleures images de la journée."
+                        isDayMode={isDayMode}
+                      />
+                    )}
+                    {activeDay === 'samedi' && (
+                      <>
+                        <TimelineItem 
+                          time="17h00 - 18h00" 
+                          title="Apéro Sunset avec DJ Set au Sommet" 
+                          description="Accès par télécabine, vue imprenable."
+                          isDayMode={isDayMode}
+                        />
+                        <TimelineItem 
+                          time="18h00 - 2h00" 
+                          title="Soirée Festival – Nuit du Feu" 
+                          description="Line-up principal, guests surprise, show laser et GROS FEU D’ARTIFICE à 22h30. Bar extérieur en igloo, dancefloor sur neige."
+                          isDayMode={isDayMode}
+                        />
+                      </>
+                    )}
+                     {activeDay === 'dimanche' && (
+                      <TimelineItem 
+                        time="17h00 - 20h00" 
+                        title="Départ des Festivaliers" 
+                        description="Derniers instants sur la station, fin du festival."
+                        isDayMode={isDayMode}
+                      />
+                    )}
                   </div>
                 </div>
                 
-                <div className={`rounded-xl p-6 md:p-8 ${
-                  isDayMode 
-                    ? 'bg-day-turquoise/10' 
-                    : 'bg-night-purple/10'
-                }`}>
-                  <h4 className={`font-orbitron text-lg font-bold mb-3 ${
-                    isDayMode ? 'text-night-blue' : 'text-white'
+                {/* Scènes section - kept as is */}
+                {activeDay !== 'jeudi' && (
+                  <div className={`rounded-xl p-6 md:p-8 ${
+                    isDayMode 
+                      ? 'bg-day-turquoise/10' 
+                      : 'bg-night-purple/10'
                   }`}>
-                    Scènes
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <SceneItem 
-                      name="Grande scène" 
-                      location="Front de neige" 
-                      capacity="5000 personnes"
-                      isDayMode={isDayMode}
-                    />
-                    <SceneItem 
-                      name="Scène découverte" 
-                      location="Chapiteau" 
-                      capacity="1500 personnes"
-                      isDayMode={isDayMode}
-                    />
-                    <SceneItem 
-                      name="After party" 
-                      location="Salle polyvalente" 
-                      capacity="800 personnes"
-                      isDayMode={isDayMode}
-                    />
+                    <h4 className={`font-orbitron text-lg font-bold mb-3 ${
+                      isDayMode ? 'text-night-blue' : 'text-white'
+                    }`}>
+                      Scènes
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <SceneItem 
+                        name="Grande scène" 
+                        location="Front de neige" 
+                        capacity="5000 personnes"
+                        isDayMode={isDayMode}
+                      />
+                      <SceneItem 
+                        name="Scène découverte" 
+                        location="Chapiteau" 
+                        capacity="1500 personnes"
+                        isDayMode={isDayMode}
+                      />
+                      <SceneItem 
+                        name="After party" 
+                        location="Salle polyvalente" 
+                        capacity="800 personnes"
+                        isDayMode={isDayMode}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
           </div>
