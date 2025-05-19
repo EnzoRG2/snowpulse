@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Snowflake } from 'lucide-react';
 
@@ -27,7 +26,7 @@ const Footer: React.FC<FooterProps> = ({ isDayMode }) => {
               Le festival qui fusionne adrénaline glacée et énergie électro pour une expérience unique au cœur des Alpes.
             </p>
             <p className={`text-sm ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}>
-              10-12 Mars 2025<br />
+              13 - 15 Mars 2026<br />
               Les Saisies, France
             </p>
           </div>
