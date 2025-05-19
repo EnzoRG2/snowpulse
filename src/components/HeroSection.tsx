@@ -170,7 +170,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
               padding: '2px 6px',
             }}
           >
-            15 - 17 mars 2026
+            13 - 15 Mars 2026
           </div>
         </div>
       </div>
