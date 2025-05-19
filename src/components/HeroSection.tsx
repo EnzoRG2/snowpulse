@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Snowflake } from 'lucide-react';
 
@@ -59,7 +58,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         </div>
       )}
       
-      {/* Night stars - more subtle */}
       {!isDayMode && (
         <div className="absolute inset-0 z-0">
           {[...Array(40)].map((_, i) => (
@@ -172,7 +170,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
               padding: '2px 6px',
             }}
           >
-            10-12 MARS 2025
+            15 au 17 mars 2026
           </div>
         </div>
       </div>
