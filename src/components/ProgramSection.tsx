@@ -150,7 +150,7 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                          <TimelineItem 
                           time="16h00 - 17h30" 
                           title="Premiers Tours Courses de Luges" 
-                          description="Différents départs (piste réservée)."
+                          description="20 départs de 50 personnes. Piste forêt, départ en haut du télésiège forêt. Location de luge obligatoire (25 luges réutilisées par départ), possibilité d'achat de luges floquées. Casque obligatoire et protections pour la piste."
                           isDayMode={isDayMode}
                         />
                       </>
@@ -178,7 +178,7 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                         <TimelineItem 
                           time="15h30 - 16h30" 
                           title="GRANDE FINALE DES COURSES DE LUGE 🛷🔥" 
-                          description="Parcours agrandi et chronométré, finale en duel sur écran géant, ambiance survoltée ! Trophée remis sur le podium."
+                          description="Qualification des 3 premiers de chaque départ du vendredi pour la finale. Parcours agrandi et chronométré, finale en duel sur écran géant, ambiance survoltée ! Trophée remis sur le podium."
                           isDayMode={isDayMode}
                         />
                       </>
@@ -214,7 +214,7 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                   </div>
                 </div>
                 
-                {/* Cash Prize section - kept as is */}
+                {/* Cash Prize section */}
                 {activeDay !== 'jeudi' && (
                   <div className={`rounded-xl p-6 md:p-8 ${
                     isDayMode 
@@ -300,7 +300,7 @@ const ProgramSection: React.FC<ProgramSectionProps> = ({ isDayMode }) => {
                   </div>
                 </div>
                 
-                {/* Scènes section - kept as is */}
+                {/* Scènes section */}
                 {activeDay !== 'jeudi' && (
                   <div className={`rounded-xl p-6 md:p-8 ${
                     isDayMode 
