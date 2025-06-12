@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -59,42 +58,35 @@ const ProfilePage = () => {
 
     setIsLoading(true);
     try {
-      console.log('Tentative de suppression du compte pour l\'utilisateur:', session.user.id);
+      console.log('Demande de suppression du compte pour l\'utilisateur:', session.user.id);
       
-      // Utiliser la fonction d'administration de Supabase pour supprimer l'utilisateur
-      const { error } = await supabase.auth.admin.deleteUser(session.user.id);
-      
-      if (error) {
-        console.error('Erreur lors de la suppression:', error);
-        
-        // Si l'API admin n'est pas disponible, essayer de se déconnecter
-        if (error.message?.includes('admin') || error.message?.includes('permission')) {
-          toast({
-            title: 'Suppression en cours',
-            description: 'Votre demande de suppression de compte a été enregistrée. Vous allez être déconnecté.',
-          });
-          
-          // Déconnecter l'utilisateur
-          await supabase.auth.signOut();
-          navigate('/auth');
-          return;
+      // Envoyer un email de confirmation pour la suppression
+      const { error: emailError } = await supabase.auth.resetPasswordForEmail(
+        session.user.email!,
+        {
+          redirectTo: `${window.location.origin}/auth?message=account-deletion-requested`
         }
-        
-        throw error;
+      );
+
+      if (emailError) {
+        console.error('Erreur lors de l\'envoi de l\'email:', emailError);
+        throw emailError;
       }
 
       toast({
-        title: 'Compte supprimé',
-        description: 'Votre compte a été supprimé avec succès.',
+        title: 'Demande de suppression envoyée',
+        description: 'Un email de confirmation a été envoyé. Veuillez suivre les instructions pour finaliser la suppression de votre compte.',
       });
 
-      // Rediriger vers la page d'authentification
+      // Optionnel : déconnecter l'utilisateur
+      await supabase.auth.signOut();
       navigate('/auth');
+
     } catch (error: any) {
-      console.error('Erreur lors de la suppression du compte:', error);
+      console.error('Erreur lors de la demande de suppression:', error);
       toast({
         title: 'Erreur',
-        description: 'Une erreur est survenue lors de la suppression. Veuillez réessayer ou contacter le support.',
+        description: 'Une erreur est survenue lors de la demande de suppression. Veuillez réessayer.',
         variant: 'destructive',
       });
     } finally {
@@ -200,7 +192,7 @@ const ProfilePage = () => {
                 </h4>
               </div>
               <p className={`text-sm leading-relaxed ${isDayMode ? 'text-night-blue/70' : 'text-white/70'}`}>
-                Cette action est irréversible. Toutes vos données seront définitivement supprimées et vous ne pourrez plus accéder à votre compte.
+                Cette action enverra une demande de suppression de compte. Un email de confirmation vous sera envoyé pour finaliser la suppression.
               </p>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
@@ -210,7 +202,7 @@ const ProfilePage = () => {
                     className="font-orbitron font-semibold tracking-wider bg-red-600 hover:bg-red-700"
                   >
                     <Trash2 className="h-4 w-4 mr-2" />
-                    Supprimer le compte
+                    Demander la suppression
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent className={`${
@@ -222,12 +214,12 @@ const ProfilePage = () => {
                     <AlertDialogTitle className={`font-orbitron ${
                       isDayMode ? 'text-night-blue' : 'text-white'
                     }`}>
-                      Êtes-vous absolument sûr ?
+                      Confirmer la demande de suppression
                     </AlertDialogTitle>
                     <AlertDialogDescription className={`${
                       isDayMode ? 'text-night-blue/70' : 'text-white/70'
                     }`}>
-                      Cette action est irréversible. Votre compte et toutes vos données associées seront définitivement supprimés.
+                      Cette action enverra une demande de suppression de compte. Un email de confirmation sera envoyé à votre adresse.
                       <br /><br />
                       Pour confirmer, veuillez saisir votre adresse email : <strong>{session.user.email}</strong>
                     </AlertDialogDescription>
@@ -261,7 +253,7 @@ const ProfilePage = () => {
                       disabled={isLoading || confirmationEmail !== session.user.email}
                       className="bg-red-600 hover:bg-red-700 font-orbitron font-semibold disabled:opacity-50"
                     >
-                      {isLoading ? 'Suppression...' : 'Oui, supprimer mon compte'}
+                      {isLoading ? 'Envoi en cours...' : 'Envoyer la demande'}
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
