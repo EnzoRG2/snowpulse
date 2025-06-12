@@ -60,7 +60,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
           )}
           {user && (
             <>
-              <span className={`text-sm ${isDayMode ? 'text-slate-700' : 'text-slate-300'} flex items-center`}>
+              <span className={`relative text-sm flex items-center font-medium tracking-wider transition-all duration-300 after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 cursor-default ${
+                isDayMode ? 'text-slate-700 after:bg-day-turquoise hover:opacity-80' : 'text-slate-300 after:bg-night-pink hover:opacity-80'
+              }`}>
                 <UserIcon className="h-4 w-4 mr-1" /> {user.email?.split('@')[0]}
               </span>
               <button 
