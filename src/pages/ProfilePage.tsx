@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { User, Trash2, KeyRound, ArrowLeft, Mail, Snowflake } from 'lucide-react';
+import { User, Trash2, ArrowLeft, Snowflake } from 'lucide-react';
 import DayNightToggle from '@/components/DayNightToggle';
 import type { Session } from '@supabase/supabase-js';
 
@@ -41,49 +41,6 @@ const ProfilePage = () => {
 
   const toggleDayNight = () => {
     setIsDayMode(!isDayMode);
-  };
-
-  const handlePasswordReset = async () => {
-    if (!session?.user?.email) {
-      toast({
-        title: 'Erreur',
-        description: 'Impossible de récupérer votre adresse email.',
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      // Utilisez l'URL de votre site déployé au lieu de localhost
-      const siteUrl = window.location.hostname === 'localhost' 
-        ? 'https://your-site.lovable.app' // Remplacez par votre URL Lovable
-        : window.location.origin;
-
-      const { error } = await supabase.auth.resetPasswordForEmail(session.user.email, {
-        redirectTo: `${siteUrl}/auth`,
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: 'Email envoyé',
-        description: 'Un lien de réinitialisation a été envoyé à votre adresse email. Vous allez être déconnecté pour pouvoir utiliser le lien.',
-      });
-
-      // Disconnect the user so they can use the reset link
-      setTimeout(async () => {
-        await supabase.auth.signOut();
-      }, 2000);
-    } catch (error: any) {
-      toast({
-        title: 'Erreur',
-        description: error.message,
-        variant: 'destructive',
-      });
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   const handleDeleteAccount = async () => {
@@ -193,38 +150,6 @@ const ProfilePage = () => {
             }`}>
               Actions du compte
             </h3>
-
-            {/* Password reset section */}
-            <div className="space-y-6 mb-8">
-              <div className="flex items-center space-x-3">
-                <div className={`p-2 rounded-lg ${
-                  isDayMode ? 'bg-day-turquoise/20' : 'bg-night-pink/20'
-                }`}>
-                  <KeyRound className={`h-6 w-6 ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`} />
-                </div>
-                <h4 className={`text-xl font-semibold ${isDayMode ? 'text-night-blue' : 'text-white'}`}>
-                  Réinitialiser le mot de passe
-                </h4>
-              </div>
-              <p className={`text-sm leading-relaxed ${isDayMode ? 'text-night-blue/70' : 'text-white/70'}`}>
-                Recevez un lien de réinitialisation par email pour créer un nouveau mot de passe sécurisé. Vous serez déconnecté après l'envoi de l'email.
-              </p>
-              <Button
-                onClick={handlePasswordReset}
-                disabled={isLoading}
-                className={`snow-pulse-button ${
-                  isDayMode ? 'snow-pulse-button-day' : 'snow-pulse-button-night'
-                } font-orbitron font-semibold tracking-wider`}
-              >
-                <Mail className="h-4 w-4 mr-2" />
-                {isLoading ? 'Envoi en cours...' : 'Envoyer le lien de réinitialisation'}
-              </Button>
-            </div>
-
-            {/* Divider */}
-            <div className={`border-t mb-8 ${
-              isDayMode ? 'border-day-turquoise/20' : 'border-night-pink/20'
-            }`}></div>
 
             {/* Delete account section */}
             <div className="space-y-6">
