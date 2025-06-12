@@ -97,10 +97,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
                 <div className="relative">
                   <Input 
                     type={showPassword ? "text" : "password"}
-                    placeholder="••••••••" 
+                    placeholder="Mot de passe" 
                     {...field} 
                     disabled={isLoading}
                     className="password-input pr-10"
+                    style={!showPassword ? { 
+                      fontFamily: 'monospace',
+                      letterSpacing: '0.2em'
+                    } : {}}
                   />
                   <Button
                     type="button"
