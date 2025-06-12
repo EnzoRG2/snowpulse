@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Snowflake, User as UserIcon, LogOut } from 'lucide-react';
 import DayNightToggle from './DayNightToggle';
@@ -58,7 +57,6 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
               Connexion
             </Link>
           )}
-          <DayNightToggle isDayMode={isDayMode} toggleDayNight={toggleDayNight} />
           {user && (
             <>
               <span className={`text-sm ${isDayMode ? 'text-slate-700' : 'text-slate-300'} flex items-center`}>
@@ -69,6 +67,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
               </Button>
             </>
           )}
+          <DayNightToggle isDayMode={isDayMode} toggleDayNight={toggleDayNight} />
         </div>
         
         <button 
