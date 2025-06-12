@@ -79,8 +79,13 @@ const AuthPage: React.FC = () => {
 
     setIsLoading(true);
     try {
+      // Utilisez l'URL de votre site déployé au lieu de localhost
+      const siteUrl = window.location.hostname === 'localhost' 
+        ? 'https://your-site.lovable.app' // Remplacez par votre URL Lovable
+        : window.location.origin;
+
       const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
-        redirectTo: `${window.location.origin}/auth`,
+        redirectTo: `${siteUrl}/auth`,
       });
 
       if (error) throw error;
