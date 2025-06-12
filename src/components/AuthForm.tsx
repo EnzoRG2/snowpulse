@@ -93,7 +93,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
             <FormItem>
               <FormLabel>Mot de passe</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} disabled={isLoading} />
+                <Input 
+                  type="password" 
+                  placeholder="••••••••" 
+                  {...field} 
+                  disabled={isLoading}
+                  style={{ WebkitTextSecurity: 'disc' }}
+                  className="password-input"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
