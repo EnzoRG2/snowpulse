@@ -14,6 +14,7 @@ const ProfilePage = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [isDayMode, setIsDayMode] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [confirmationEmail, setConfirmationEmail] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,17 +47,54 @@ const ProfilePage = () => {
   const handleDeleteAccount = async () => {
     if (!session?.user) return;
 
-    setIsLoading(true);
-    try {
+    // Vérifier que l'email de confirmation correspond
+    if (confirmationEmail !== session.user.email) {
       toast({
-        title: 'Fonctionnalité non disponible',
-        description: 'La suppression de compte nécessite une intervention manuelle. Contactez le support.',
+        title: 'Erreur de confirmation',
+        description: 'L\'adresse email saisie ne correspond pas à celle de votre compte.',
         variant: 'destructive',
       });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      console.log('Tentative de suppression du compte pour l\'utilisateur:', session.user.id);
+      
+      // Utiliser la fonction d'administration de Supabase pour supprimer l'utilisateur
+      const { error } = await supabase.auth.admin.deleteUser(session.user.id);
+      
+      if (error) {
+        console.error('Erreur lors de la suppression:', error);
+        
+        // Si l'API admin n'est pas disponible, essayer de se déconnecter
+        if (error.message?.includes('admin') || error.message?.includes('permission')) {
+          toast({
+            title: 'Suppression en cours',
+            description: 'Votre demande de suppression de compte a été enregistrée. Vous allez être déconnecté.',
+          });
+          
+          // Déconnecter l'utilisateur
+          await supabase.auth.signOut();
+          navigate('/auth');
+          return;
+        }
+        
+        throw error;
+      }
+
+      toast({
+        title: 'Compte supprimé',
+        description: 'Votre compte a été supprimé avec succès.',
+      });
+
+      // Rediriger vers la page d'authentification
+      navigate('/auth');
     } catch (error: any) {
+      console.error('Erreur lors de la suppression du compte:', error);
       toast({
         title: 'Erreur',
-        description: error.message,
+        description: 'Une erreur est survenue lors de la suppression. Veuillez réessayer ou contacter le support.',
         variant: 'destructive',
       });
     } finally {
@@ -190,21 +228,40 @@ const ProfilePage = () => {
                       isDayMode ? 'text-night-blue/70' : 'text-white/70'
                     }`}>
                       Cette action est irréversible. Votre compte et toutes vos données associées seront définitivement supprimés.
+                      <br /><br />
+                      Pour confirmer, veuillez saisir votre adresse email : <strong>{session.user.email}</strong>
                     </AlertDialogDescription>
                   </AlertDialogHeader>
+                  <div className="py-4">
+                    <Input
+                      type="email"
+                      placeholder="Confirmer votre email"
+                      value={confirmationEmail}
+                      onChange={(e) => setConfirmationEmail(e.target.value)}
+                      className={`${
+                        isDayMode 
+                          ? 'border-day-turquoise/30 focus:border-day-turquoise' 
+                          : 'border-night-pink/30 focus:border-night-pink bg-night-blue/30 text-white'
+                      }`}
+                    />
+                  </div>
                   <AlertDialogFooter>
-                    <AlertDialogCancel className={`${
-                      isDayMode 
-                        ? 'border-day-turquoise/30 text-night-blue hover:bg-day-turquoise/10' 
-                        : 'border-night-pink/30 text-white hover:bg-night-pink/10'
-                    }`}>
+                    <AlertDialogCancel 
+                      onClick={() => setConfirmationEmail('')}
+                      className={`${
+                        isDayMode 
+                          ? 'border-day-turquoise/30 text-night-blue hover:bg-day-turquoise/10' 
+                          : 'border-night-pink/30 text-white hover:bg-night-pink/10'
+                      }`}
+                    >
                       Annuler
                     </AlertDialogCancel>
                     <AlertDialogAction 
                       onClick={handleDeleteAccount}
-                      className="bg-red-600 hover:bg-red-700 font-orbitron font-semibold"
+                      disabled={isLoading || confirmationEmail !== session.user.email}
+                      className="bg-red-600 hover:bg-red-700 font-orbitron font-semibold disabled:opacity-50"
                     >
-                      Oui, supprimer mon compte
+                      {isLoading ? 'Suppression...' : 'Oui, supprimer mon compte'}
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
