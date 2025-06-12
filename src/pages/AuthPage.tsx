@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import AuthForm from '@/components/AuthForm';
 import { Button } from '@/components/ui/button';
@@ -7,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import type { Session } from '@supabase/supabase-js';
-import { Eye, EyeClosed, Snowflake } from 'lucide-react';
+import { Eye, EyeClosed } from 'lucide-react';
 
 const AuthPage: React.FC = () => {
   const [mode, setMode] = useState<'login' | 'signup' | 'forgot-password' | 'reset-password'>('login');
@@ -186,17 +185,6 @@ const AuthPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 text-white p-4">
-      {/* Logo et titre principal */}
-      <div className="mb-8 text-center">
-        <div className="flex items-center justify-center mb-4">
-          <Snowflake className="h-12 w-12 mr-3 text-blue-400" />
-          <span className="font-orbitron text-3xl font-bold tracking-wider">
-            <span className="text-blue-400">SNOW</span>
-            <span className="text-white">PULSE</span>
-          </span>
-        </div>
-      </div>
-
       <div className="bg-slate-800/50 backdrop-blur-md p-8 rounded-xl shadow-2xl w-full max-w-md">
         <h1 className="text-3xl font-bold text-center mb-2">
           {getTitle()}
