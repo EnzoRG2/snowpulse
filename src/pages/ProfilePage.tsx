@@ -14,7 +14,6 @@ const ProfilePage = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [isDayMode, setIsDayMode] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [resetEmail, setResetEmail] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +24,6 @@ const ProfilePage = () => {
         return;
       }
       setSession(session);
-      setResetEmail(session.user.email || '');
     };
 
     checkSession();
@@ -46,10 +44,10 @@ const ProfilePage = () => {
   };
 
   const handlePasswordReset = async () => {
-    if (!resetEmail) {
+    if (!session?.user?.email) {
       toast({
         title: 'Erreur',
-        description: 'Veuillez entrer une adresse email.',
+        description: 'Impossible de récupérer votre adresse email.',
         variant: 'destructive',
       });
       return;
@@ -57,7 +55,7 @@ const ProfilePage = () => {
 
     setIsLoading(true);
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+      const { error } = await supabase.auth.resetPasswordForEmail(session.user.email, {
         redirectTo: `${window.location.origin}/auth`,
       });
 
@@ -65,8 +63,13 @@ const ProfilePage = () => {
 
       toast({
         title: 'Email envoyé',
-        description: 'Un lien de réinitialisation a été envoyé à votre adresse email.',
+        description: 'Un lien de réinitialisation a été envoyé à votre adresse email. Vous allez être déconnecté pour pouvoir utiliser le lien.',
       });
+
+      // Disconnect the user so they can use the reset link
+      setTimeout(async () => {
+        await supabase.auth.signOut();
+      }, 2000);
     } catch (error: any) {
       toast({
         title: 'Erreur',
@@ -199,31 +202,18 @@ const ProfilePage = () => {
                 </h4>
               </div>
               <p className={`text-sm leading-relaxed ${isDayMode ? 'text-night-blue/70' : 'text-white/70'}`}>
-                Recevez un lien de réinitialisation par email pour créer un nouveau mot de passe sécurisé
+                Recevez un lien de réinitialisation par email pour créer un nouveau mot de passe sécurisé. Vous serez déconnecté après l'envoi de l'email.
               </p>
-              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                <Input
-                  type="email"
-                  placeholder="Votre adresse email"
-                  value={resetEmail}
-                  onChange={(e) => setResetEmail(e.target.value)}
-                  className={`flex-1 ${
-                    isDayMode 
-                      ? 'bg-white/90 border-day-turquoise/30 focus:border-day-turquoise text-night-blue' 
-                      : 'bg-night-blue/50 border-night-pink/30 focus:border-night-pink text-white'
-                  }`}
-                />
-                <Button
-                  onClick={handlePasswordReset}
-                  disabled={isLoading}
-                  className={`snow-pulse-button ${
-                    isDayMode ? 'snow-pulse-button-day' : 'snow-pulse-button-night'
-                  } font-orbitron font-semibold tracking-wider`}
-                >
-                  <Mail className="h-4 w-4 mr-2" />
-                  Envoyer
-                </Button>
-              </div>
+              <Button
+                onClick={handlePasswordReset}
+                disabled={isLoading}
+                className={`snow-pulse-button ${
+                  isDayMode ? 'snow-pulse-button-day' : 'snow-pulse-button-night'
+                } font-orbitron font-semibold tracking-wider`}
+              >
+                <Mail className="h-4 w-4 mr-2" />
+                {isLoading ? 'Envoi en cours...' : 'Envoyer le lien de réinitialisation'}
+              </Button>
             </div>
 
             {/* Divider */}
