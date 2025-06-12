@@ -50,8 +50,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
           {!user && (
             <Link 
               to="/auth"
-              className={`font-medium text-sm tracking-wider hover:opacity-80 transition-opacity ${
-                isDayMode ? 'text-night-blue' : 'text-white'
+              className={`relative font-medium text-sm tracking-wider transition-all duration-300 after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+                isDayMode ? 'text-night-blue after:bg-day-turquoise hover:opacity-80' : 'text-white after:bg-night-pink hover:opacity-80'
               }`}
             >
               Connexion
