@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Snowflake, User as UserIcon, LogOut } from 'lucide-react';
 import DayNightToggle from './DayNightToggle';
@@ -47,17 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
           <NavLink href="#program" isDayMode={isDayMode}>Programme</NavLink>
           <NavLink href="#technology" isDayMode={isDayMode}>Technologie</NavLink>
           <NavLink href="#tickets" isDayMode={isDayMode}>Billets</NavLink>
-          <DayNightToggle isDayMode={isDayMode} toggleDayNight={toggleDayNight} />
-          {user ? (
-            <>
-              <span className={`text-sm ${isDayMode ? 'text-slate-700' : 'text-slate-300'} flex items-center`}>
-                <UserIcon className="h-4 w-4 mr-1" /> {user.email?.split('@')[0]}
-              </span>
-              <Button onClick={handleLogout} variant="outline" size="sm" className={`${isDayMode ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-slate-700 text-slate-300 hover:bg-slate-800'}`}>
-                <LogOut className="h-4 w-4" />
-              </Button>
-            </>
-          ) : (
+          {!user && (
             <Link 
               to="/auth"
               className={`font-medium text-sm tracking-wider hover:opacity-80 transition-opacity ${
@@ -66,6 +57,17 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
             >
               Connexion
             </Link>
+          )}
+          <DayNightToggle isDayMode={isDayMode} toggleDayNight={toggleDayNight} />
+          {user && (
+            <>
+              <span className={`text-sm ${isDayMode ? 'text-slate-700' : 'text-slate-300'} flex items-center`}>
+                <UserIcon className="h-4 w-4 mr-1" /> {user.email?.split('@')[0]}
+              </span>
+              <Button onClick={handleLogout} variant="outline" size="sm" className={`${isDayMode ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-slate-700 text-slate-300 hover:bg-slate-800'}`}>
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </>
           )}
         </div>
         
