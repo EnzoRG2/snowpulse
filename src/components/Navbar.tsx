@@ -61,11 +61,14 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
           ) : (
             <Link 
               to="/auth"
-              className={`snow-pulse-button flex items-center text-sm font-medium ${
-                isDayMode ? 'snow-pulse-button-day' : 'snow-pulse-button-night'
+              className={`rounded-md py-3 px-6 font-bold transition-all duration-300 flex justify-center items-center text-sm ${
+                isDayMode 
+                  ? 'bg-night-blue text-white hover:bg-night-blue/90 hover:shadow-lg'
+                  : 'bg-night-purple text-white hover:bg-night-purple/90 hover:shadow-lg'
               }`}
             >
-              <UserIcon className="mr-2 h-4 w-4" /> Connexion
+              <UserIcon className="mr-2 h-4 w-4" />
+              <span>Connexion</span>
             </Link>
           )}
         </div>
