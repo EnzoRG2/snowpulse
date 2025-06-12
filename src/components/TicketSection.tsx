@@ -164,7 +164,7 @@ interface TicketCardProps {
 const TicketCard: React.FC<TicketCardProps> = ({ name, price, features, highlight, isDayMode }) => {
   return (
     <div 
-      className={`rounded-xl overflow-hidden transition-transform hover:translate-y-[-5px] ${
+      className={`rounded-xl overflow-hidden transition-transform hover:translate-y-[-5px] flex flex-col h-full ${
         isDayMode
           ? highlight 
             ? 'bg-gradient-to-br from-day-turquoise to-day-blue shadow-lg' 
@@ -174,7 +174,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ name, price, features, highligh
             : 'bg-night-blue/50 border border-night-purple/20 shadow-md'
       }`}
     >
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className={`font-orbitron text-xl font-bold mb-2 ${
           isDayMode
             ? highlight ? 'text-white' : 'text-night-blue'
@@ -193,7 +193,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ name, price, features, highligh
           </div>
         </div>
         
-        <ul className="space-y-3 mb-6">
+        <ul className="space-y-3 mb-6 flex-grow">
           {features.map((feature, index) => (
             <li 
               key={index} 
@@ -230,7 +230,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ name, price, features, highligh
         </ul>
         
         <button 
-          className={`w-full rounded-md py-3 font-bold transition-all duration-300 flex justify-center items-center ${
+          className={`w-full rounded-md py-3 font-bold transition-all duration-300 flex justify-center items-center mt-auto ${
             isDayMode
               ? highlight 
                 ? 'bg-white text-day-turquoise hover:shadow-lg' 
