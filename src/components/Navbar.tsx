@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Snowflake, User as UserIcon, LogOut } from 'lucide-react';
 import DayNightToggle from './DayNightToggle';
@@ -60,11 +59,14 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
           )}
           {user && (
             <>
-              <span className={`relative text-sm flex items-center font-medium tracking-wider transition-all duration-300 after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 cursor-default ${
-                isDayMode ? 'text-slate-700 after:bg-day-turquoise hover:opacity-80' : 'text-slate-300 after:bg-night-pink hover:opacity-80'
-              }`}>
+              <Link 
+                to="/profile"
+                className={`relative text-sm flex items-center font-medium tracking-wider transition-all duration-300 after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+                  isDayMode ? 'text-slate-700 after:bg-day-turquoise hover:opacity-80' : 'text-slate-300 after:bg-night-pink hover:opacity-80'
+                }`}
+              >
                 <UserIcon className="h-4 w-4 mr-1" /> {user.email?.split('@')[0]}
-              </span>
+              </Link>
               <button 
                 onClick={handleLogout}
                 className={`relative font-medium text-sm tracking-wider transition-all duration-300 after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
@@ -108,6 +110,11 @@ const Navbar: React.FC<NavbarProps> = ({ isDayMode, toggleDayNight, session, han
                 <div className={`flex items-center justify-center text-sm mb-2 ${isDayMode ? 'text-slate-700' : 'text-slate-300'}`}>
                   <UserIcon className="h-4 w-4 mr-2" /> {user.email}
                 </div>
+                <Button asChild variant="ghost" size="sm" className={`w-full ${isDayMode ? 'text-slate-700 hover:bg-slate-100' : 'text-slate-300 hover:bg-slate-800'}`} onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/profile">
+                    <UserIcon className="mr-2 h-4 w-4" /> Profil
+                  </Link>
+                </Button>
                 <Button onClick={() => { handleLogout(); setMobileMenuOpen(false); }} variant="ghost" size="sm" className={`w-full ${isDayMode ? 'text-slate-700 hover:bg-slate-100' : 'text-slate-300 hover:bg-slate-800'}`}>
                   <LogOut className="mr-2 h-4 w-4" /> Déconnexion
                 </Button>
