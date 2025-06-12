@@ -10,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Eye, EyeClosed } from 'lucide-react';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Adresse e-mail invalide.' }),
@@ -26,6 +26,7 @@ interface AuthFormProps {
 const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<AuthFormValues>({
     resolver: zodResolver(formSchema),
@@ -93,14 +94,29 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
             <FormItem>
               <FormLabel>Mot de passe</FormLabel>
               <FormControl>
-                <Input 
-                  type="password" 
-                  placeholder="••••••••" 
-                  {...field} 
-                  disabled={isLoading}
-                  style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
-                  className="password-input"
-                />
+                <div className="relative">
+                  <Input 
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••" 
+                    {...field} 
+                    disabled={isLoading}
+                    className="password-input pr-10"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                    disabled={isLoading}
+                  >
+                    {showPassword ? (
+                      <EyeClosed className="h-4 w-4 text-slate-500" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-slate-500" />
+                    )}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
