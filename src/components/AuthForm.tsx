@@ -98,7 +98,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
                   placeholder="••••••••" 
                   {...field} 
                   disabled={isLoading}
-                  style={{ WebkitTextSecurity: 'disc' }}
+                  style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
                   className="password-input"
                 />
               </FormControl>
