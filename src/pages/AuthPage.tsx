@@ -7,7 +7,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import type { Session } from '@supabase/supabase-js';
-import { Eye, EyeClosed } from 'lucide-react';
+import { Eye, EyeClosed, Snowflake } from 'lucide-react';
 
 const AuthPage: React.FC = () => {
   const [mode, setMode] = useState<'login' | 'signup' | 'forgot-password' | 'reset-password'>('login');
@@ -169,7 +169,7 @@ const AuthPage: React.FC = () => {
       case 'login': return 'Connexion';
       case 'signup': return 'Inscription';
       case 'forgot-password': return 'Mot de passe oublié';
-      case 'reset-password': return 'Nouveau mot de passe';
+      case 'reset-password': return 'Définir un nouveau mot de passe';
       default: return 'Connexion';
     }
   };
@@ -179,13 +179,24 @@ const AuthPage: React.FC = () => {
       case 'login': return 'Accédez à votre compte Snow Pulse.';
       case 'signup': return 'Créez un compte pour rejoindre Snow Pulse.';
       case 'forgot-password': return 'Entrez votre email pour recevoir un lien de réinitialisation.';
-      case 'reset-password': return 'Définissez votre nouveau mot de passe.';
+      case 'reset-password': return 'Entrez votre nouveau mot de passe pour sécuriser votre compte.';
       default: return 'Accédez à votre compte Snow Pulse.';
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 text-white p-4">
+      {/* Logo et titre principal */}
+      <div className="mb-8 text-center">
+        <div className="flex items-center justify-center mb-4">
+          <Snowflake className="h-12 w-12 mr-3 text-blue-400" />
+          <span className="font-orbitron text-3xl font-bold tracking-wider">
+            <span className="text-blue-400">SNOW</span>
+            <span className="text-white">PULSE</span>
+          </span>
+        </div>
+      </div>
+
       <div className="bg-slate-800/50 backdrop-blur-md p-8 rounded-xl shadow-2xl w-full max-w-md">
         <h1 className="text-3xl font-bold text-center mb-2">
           {getTitle()}
@@ -220,6 +231,12 @@ const AuthPage: React.FC = () => {
           </div>
         ) : mode === 'reset-password' ? (
           <div className="space-y-6">
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
+              <p className="text-blue-300 text-sm text-center">
+                ✓ Lien de réinitialisation validé. Définissez votre nouveau mot de passe ci-dessous.
+              </p>
+            </div>
+            
             <div>
               <label htmlFor="new-password" className="block text-sm font-medium text-slate-300 mb-2">
                 Nouveau mot de passe
@@ -228,7 +245,7 @@ const AuthPage: React.FC = () => {
                 <Input
                   id="new-password"
                   type={showNewPassword ? "text" : "password"}
-                  placeholder="Nouveau mot de passe"
+                  placeholder="Minimum 6 caractères"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   disabled={isLoading}
@@ -254,6 +271,7 @@ const AuthPage: React.FC = () => {
                 </Button>
               </div>
             </div>
+            
             <div>
               <label htmlFor="confirm-password" className="block text-sm font-medium text-slate-300 mb-2">
                 Confirmer le mot de passe
@@ -262,7 +280,7 @@ const AuthPage: React.FC = () => {
                 <Input
                   id="confirm-password"
                   type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirmer le mot de passe"
+                  placeholder="Répétez le mot de passe"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   disabled={isLoading}
@@ -288,12 +306,13 @@ const AuthPage: React.FC = () => {
                 </Button>
               </div>
             </div>
+            
             <Button
               onClick={handleNewPasswordSubmit}
-              disabled={isLoading}
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              disabled={isLoading || !newPassword || !confirmPassword}
+              className="w-full bg-green-600 hover:bg-green-700 font-semibold"
             >
-              {isLoading ? 'Mise à jour...' : 'Mettre à jour le mot de passe'}
+              {isLoading ? 'Mise à jour...' : 'Valider le nouveau mot de passe'}
             </Button>
           </div>
         ) : (
