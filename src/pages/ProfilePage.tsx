@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { User, Trash2, ArrowLeft, Snowflake } from 'lucide-react';
+import { User, Trash2, ArrowLeft, Snowflake, LogOut } from 'lucide-react';
 import DayNightToggle from '@/components/DayNightToggle';
 import type { Session } from '@supabase/supabase-js';
 
@@ -42,6 +42,23 @@ const ProfilePage = () => {
 
   const toggleDayNight = () => {
     setIsDayMode(!isDayMode);
+  };
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: 'Erreur de déconnexion',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } else {
+      toast({
+        title: 'Déconnexion réussie',
+        description: 'À bientôt !',
+      });
+      navigate('/');
+    }
   };
 
   const handleDeleteAccount = async () => {
@@ -181,83 +198,115 @@ const ProfilePage = () => {
               Actions du compte
             </h3>
 
-            {/* Delete account section */}
             <div className="space-y-6">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-red-500/20">
-                  <Trash2 className="h-6 w-6 text-red-500" />
-                </div>
-                <h4 className={`text-xl font-semibold ${isDayMode ? 'text-night-blue' : 'text-white'}`}>
-                  Supprimer le compte
-                </h4>
-              </div>
-              <p className={`text-sm leading-relaxed ${isDayMode ? 'text-night-blue/70' : 'text-white/70'}`}>
-                Cette action supprimera définitivement votre compte et toutes les données associées. Cette action est irréversible.
-              </p>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button 
-                    variant="destructive" 
-                    disabled={isLoading}
-                    className="font-orbitron font-semibold tracking-wider bg-red-600 hover:bg-red-700"
-                  >
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Supprimer définitivement
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className={`${
-                  isDayMode 
-                    ? 'bg-white border-day-turquoise/20' 
-                    : 'bg-night-blue border-night-pink/20'
-                }`}>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle className={`font-orbitron ${
-                      isDayMode ? 'text-night-blue' : 'text-white'
-                    }`}>
-                      Confirmer la suppression du compte
-                    </AlertDialogTitle>
-                    <AlertDialogDescription className={`${
-                      isDayMode ? 'text-night-blue/70' : 'text-white/70'
-                    }`}>
-                      Cette action supprimera définitivement votre compte et toutes les données associées. Cette action est irréversible.
-                      <br /><br />
-                      Pour confirmer, veuillez saisir votre adresse email : <strong>{session.user.email}</strong>
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <div className="py-4">
-                    <Input
-                      type="email"
-                      placeholder="Confirmer votre email"
-                      value={confirmationEmail}
-                      onChange={(e) => setConfirmationEmail(e.target.value)}
-                      className={`${
-                        isDayMode 
-                          ? 'border-day-turquoise/30 focus:border-day-turquoise' 
-                          : 'border-night-pink/30 focus:border-night-pink bg-night-blue/30 text-white'
-                      }`}
-                    />
+              {/* Logout section */}
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`p-2 rounded-lg ${isDayMode ? 'bg-day-turquoise/20' : 'bg-night-pink/20'}`}>
+                    <LogOut className={`h-6 w-6 ${isDayMode ? 'text-day-turquoise' : 'text-night-pink'}`} />
                   </div>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel 
-                      onClick={() => setConfirmationEmail('')}
-                      className={`${
-                        isDayMode 
-                          ? 'border-day-turquoise/30 text-night-blue hover:bg-day-turquoise/10' 
-                          : 'border-night-pink/30 text-white hover:bg-night-pink/10'
-                      }`}
+                  <h4 className={`text-xl font-semibold ${isDayMode ? 'text-night-blue' : 'text-white'}`}>
+                    Se déconnecter
+                  </h4>
+                </div>
+                <p className={`text-sm leading-relaxed ${isDayMode ? 'text-night-blue/70' : 'text-white/70'}`}>
+                  Déconnectez-vous de votre compte.
+                </p>
+                <Button 
+                  onClick={handleLogout}
+                  variant="outline"
+                  className={`font-orbitron font-semibold tracking-wider ${
+                    isDayMode 
+                      ? 'border-day-turquoise/30 text-night-blue hover:bg-day-turquoise/10' 
+                      : 'border-night-pink/30 text-white hover:bg-night-pink/10'
+                  }`}
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Se déconnecter
+                </Button>
+              </div>
+
+              {/* Divider */}
+              <div className={`border-t ${isDayMode ? 'border-slate-200' : 'border-slate-700'}`}></div>
+
+              {/* Delete account section */}
+              <div className="space-y-6">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 rounded-lg bg-red-500/20">
+                    <Trash2 className="h-6 w-6 text-red-500" />
+                  </div>
+                  <h4 className={`text-xl font-semibold ${isDayMode ? 'text-night-blue' : 'text-white'}`}>
+                    Supprimer le compte
+                  </h4>
+                </div>
+                <p className={`text-sm leading-relaxed ${isDayMode ? 'text-night-blue/70' : 'text-white/70'}`}>
+                  Cette action supprimera définitivement votre compte et toutes les données associées. Cette action est irréversible.
+                </p>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button 
+                      variant="destructive" 
+                      disabled={isLoading}
+                      className="font-orbitron font-semibold tracking-wider bg-red-600 hover:bg-red-700"
                     >
-                      Annuler
-                    </AlertDialogCancel>
-                    <AlertDialogAction 
-                      onClick={handleDeleteAccount}
-                      disabled={isLoading || confirmationEmail !== session.user.email}
-                      className="bg-red-600 hover:bg-red-700 font-orbitron font-semibold disabled:opacity-50"
-                    >
-                      {isLoading ? 'Suppression...' : 'Supprimer définitivement'}
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Supprimer définitivement
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className={`${
+                    isDayMode 
+                      ? 'bg-white border-day-turquoise/20' 
+                      : 'bg-night-blue border-night-pink/20'
+                  }`}>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle className={`font-orbitron ${
+                        isDayMode ? 'text-night-blue' : 'text-white'
+                      }`}>
+                        Confirmer la suppression du compte
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className={`${
+                        isDayMode ? 'text-night-blue/70' : 'text-white/70'
+                      }`}>
+                        Cette action supprimera définitivement votre compte et toutes les données associées. Cette action est irréversible.
+                        <br /><br />
+                        Pour confirmer, veuillez saisir votre adresse email : <strong>{session.user.email}</strong>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <div className="py-4">
+                      <Input
+                        type="email"
+                        placeholder="Confirmer votre email"
+                        value={confirmationEmail}
+                        onChange={(e) => setConfirmationEmail(e.target.value)}
+                        className={`${
+                          isDayMode 
+                            ? 'border-day-turquoise/30 focus:border-day-turquoise' 
+                            : 'border-night-pink/30 focus:border-night-pink bg-night-blue/30 text-white'
+                        }`}
+                      />
+                    </div>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel 
+                        onClick={() => setConfirmationEmail('')}
+                        className={`${
+                          isDayMode 
+                            ? 'border-day-turquoise/30 text-night-blue hover:bg-day-turquoise/10' 
+                            : 'border-night-pink/30 text-white hover:bg-night-pink/10'
+                        }`}
+                      >
+                        Annuler
+                      </AlertDialogCancel>
+                      <AlertDialogAction 
+                        onClick={handleDeleteAccount}
+                        disabled={isLoading || confirmationEmail !== session.user.email}
+                        className="bg-red-600 hover:bg-red-700 font-orbitron font-semibold disabled:opacity-50"
+                      >
+                        {isLoading ? 'Suppression...' : 'Supprimer définitivement'}
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
             </div>
           </div>
         </div>
