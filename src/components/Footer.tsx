@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { Snowflake } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface FooterProps {
   isDayMode: boolean;
@@ -110,20 +112,30 @@ const Footer: React.FC<FooterProps> = ({ isDayMode }) => {
             </p>
             
             <div className="flex space-x-4">
-              {[
-                "Mentions légales",
-                "Politique de confidentialité",
-                "CGV",
-                "Accessibilité"
-              ].map((item) => (
-                <a 
-                  key={item} 
-                  href="#" 
-                  className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
-                >
-                  {item}
-                </a>
-              ))}
+              <Link 
+                to="/cgu"
+                className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
+              >
+                Mentions légales
+              </Link>
+              <a 
+                href="#" 
+                className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
+              >
+                Politique de confidentialité
+              </a>
+              <Link 
+                to="/cgv"
+                className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
+              >
+                CGV
+              </Link>
+              <a 
+                href="#" 
+                className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
+              >
+                Accessibilité
+              </a>
             </div>
           </div>
         </div>
