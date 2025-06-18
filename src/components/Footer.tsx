@@ -63,7 +63,7 @@ const Footer: React.FC<FooterProps> = ({ isDayMode }) => {
             <ul className="space-y-2">
               {[
                 ["Email", "contact@snowpulse.com"],
-                ["Téléphone", "+33 (0)4 XX XX XX XX"],
+                ["Téléphone", "+33 (0)4 79 38 90 30"],
                 ["Adresse", "Office du tourisme, Les Saisies"],
               ].map(([label, value]) => (
                 <li key={label} className={`text-sm ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}>
@@ -113,29 +113,29 @@ const Footer: React.FC<FooterProps> = ({ isDayMode }) => {
             
             <div className="flex space-x-4">
               <Link 
-                to="/cgu"
+                to="/mentions-legales"
                 className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
               >
                 Mentions légales
               </Link>
-              <a 
-                href="#" 
+              <Link 
+                to="/politique-confidentialite"
                 className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
               >
                 Politique de confidentialité
-              </a>
+              </Link>
               <Link 
                 to="/cgv"
                 className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
               >
                 CGV
               </Link>
-              <a 
-                href="#" 
+              <Link 
+                to="/cgu"
                 className={`text-xs hover:underline ${isDayMode ? 'text-day-gray' : 'text-white/70'}`}
               >
-                Accessibilité
-              </a>
+                CGU
+              </Link>
             </div>
           </div>
         </div>
