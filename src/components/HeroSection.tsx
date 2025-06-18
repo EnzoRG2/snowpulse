@@ -37,7 +37,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
             : 'url("https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&h=1080")'
         }}
         role="img"
-        aria-label={isDayMode ? "Paysage de montagne enneigée en journée" : "Forêt de sapins la nuit"}
+        aria-label={isDayMode ? "Vue panoramique des Alpes enneigées sous un ciel bleu, cadre du festival Snow Pulse" : "Forêt de sapins enneigés la nuit, ambiance nocturne du festival Snow Pulse"}
       />
       
       {/* Background Effects */}
