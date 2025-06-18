@@ -22,23 +22,27 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
       className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{
         backgroundImage: isDayMode
-          ? 'linear-gradient(to bottom, #6A9CBF 0%, #E0F0FF 100%)' // Even darker blue for day mode
-          : 'linear-gradient(to bottom, #03070E 0%, #4A1F5A 100%)' // Darker night mode gradient
+          ? 'linear-gradient(to bottom, #6A9CBF 0%, #E0F0FF 100%)'
+          : 'linear-gradient(to bottom, #03070E 0%, #4A1F5A 100%)'
       }}
+      role="banner"
+      aria-label="Section principale du festival Snow Pulse"
     >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40" // Further reduced opacity for darker effect
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40"
         style={{
           backgroundImage: isDayMode 
             ? 'url("https://images.unsplash.com/photo-1458668383970-8ddd3927deed?auto=format&fit=crop&w=1920&h=1080")'
             : 'url("https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&h=1080")'
         }}
+        role="img"
+        aria-label={isDayMode ? "Paysage de montagne enneigée en journée" : "Forêt de sapins la nuit"}
       />
       
       {/* Background Effects */}
       {showSnowflakes && isDayMode && (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0" aria-hidden="true">
           {[...Array(20)].map((_, i) => (
             <div
               key={`snowflake-${i}`}
@@ -53,6 +57,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
               <Snowflake
                 size={10 + Math.random() * 20}
                 className="text-white opacity-60"
+                aria-hidden="true"
               />
             </div>
           ))}
@@ -60,7 +65,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
       )}
       
       {!isDayMode && (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0" aria-hidden="true">
           {[...Array(40)].map((_, i) => (
             <div
               key={`star-${i}`}
@@ -88,8 +93,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
               className={`relative z-10 ${isDayMode ? 'text-gray-600' : 'text-white'}`}
               style={{
                 textShadow: isDayMode 
-                  ? '1px 1px 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.2)'
-                  : '1px 1px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 0, 0, 0.3)'
+                  ? '1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 4px rgba(0, 0, 0, 0.1)'
+                  : '1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 4px rgba(0, 0, 0, 0.2)'
               }}
             >
               SNOW
@@ -102,8 +107,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
               }`}
               style={{
                 textShadow: isDayMode 
-                  ? '1px 1px 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.2)'
-                  : '1px 1px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 0, 0, 0.3)'
+                  ? '1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 4px rgba(0, 0, 0, 0.1)'
+                  : '1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 4px rgba(0, 0, 0, 0.2)'
               }}
             >
               PULSE
@@ -129,31 +134,33 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         <div className="relative flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
           <a 
             href="#tickets" 
-            className={`px-6 py-3 rounded-md font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 ${
+            className={`px-6 py-3 rounded-md font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
               isDayMode 
-                ? 'bg-day-turquoise text-white hover:bg-day-blue' 
-                : 'bg-night-pink text-white hover:bg-night-purple'
+                ? 'bg-day-turquoise text-white hover:bg-day-blue focus:ring-day-turquoise' 
+                : 'bg-night-pink text-white hover:bg-night-purple focus:ring-night-pink'
             }`}
             style={{
               boxShadow: isDayMode 
                 ? '0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(96, 240, 214, 0.2)'
                 : '0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(255, 45, 149, 0.2)'
             }}
+            aria-label="Réserver des billets pour le festival Snow Pulse"
           >
             Réserver maintenant
           </a>
           <a 
             href="#program" 
-            className={`z-10 px-6 py-3 rounded-md font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 backdrop-blur-sm ${
+            className={`z-10 px-6 py-3 rounded-md font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${
               isDayMode 
-                ? 'text-gray-700 hover:text-night-blue border-2 border-gray-600 hover:border-night-blue bg-white/20 hover:bg-white/30' 
-                : 'text-gray-200 hover:text-white border-2 border-gray-300 hover:border-white bg-black/20 hover:bg-black/30'
+                ? 'text-gray-700 hover:text-night-blue border-2 border-gray-600 hover:border-night-blue bg-white/20 hover:bg-white/30 focus:ring-gray-600' 
+                : 'text-gray-200 hover:text-white border-2 border-gray-300 hover:border-white bg-black/20 hover:bg-black/30 focus:ring-gray-300'
             }`}
             style={{
               boxShadow: isDayMode 
                 ? '0 4px 12px rgba(0, 0, 0, 0.15)'
                 : '0 4px 12px rgba(0, 0, 0, 0.2)'
             }}
+            aria-label="Consulter le programme du festival Snow Pulse"
           >
             Voir le programme
           </a>
@@ -162,7 +169,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         <div className={`absolute bottom-12 left-0 right-0 flex justify-center ${
           isDayMode ? 'text-gray-600' : 'text-gray-300'
         }`}>
-          <a href="#concept">
+          <a 
+            href="#concept"
+            aria-label="Faire défiler vers la section concept du festival"
+            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-current rounded-md p-2"
+          >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               width="32" 
@@ -173,6 +184,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
             </svg>

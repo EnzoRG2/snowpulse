@@ -11,12 +11,16 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
     <section 
       id="concept" 
       className={`py-20 px-4 md:px-6 ${isDayMode ? 'bg-white' : 'bg-night-blue'}`}
+      aria-labelledby="concept-title"
     >
       <div className="section-container">
         <div className="text-center mb-16">
-          <h2 className={`font-medium text-3xl md:text-4xl lg:text-5xl mb-4 ${
-            isDayMode ? 'text-night-blue' : 'text-white'
-          }`}>
+          <h2 
+            id="concept-title"
+            className={`font-medium text-3xl md:text-4xl lg:text-5xl mb-4 ${
+              isDayMode ? 'text-night-blue' : 'text-white'
+            }`}
+          >
             UN FESTIVAL UNIQUE
           </h2>
           <p className={`max-w-2xl mx-auto text-lg ${
@@ -26,23 +30,23 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-16" role="list">
           <FeatureCard 
-            icon={<Snowflake />}
+            icon={<Snowflake aria-hidden="true" />}
             title="Sport Extrême"
             description="Compétitions de ski et snowboard freestyle avec des athlètes internationaux et amateurs. Cash prize de 45 000€."
             isDayMode={isDayMode}
             delay="animate-delay-200"
           />
           <FeatureCard 
-            icon={<Disc2 />}
+            icon={<Disc2 aria-hidden="true" />}
             title="Musique Électro"
             description="Artistes internationaux et locaux sur 3 scènes. Une programmation électro variée pour vibrer jusqu'au bout de la nuit."
             isDayMode={isDayMode}
             delay="animate-delay-400"
           />
           <FeatureCard 
-            icon={<Wifi />}
+            icon={<Wifi aria-hidden="true" />}
             title="Technologie"
             description="Une expérience connectée grâce aux bracelets RFID et l'app mobile Snow Pulse Connect pour une immersion totale."
             isDayMode={isDayMode}
@@ -68,7 +72,7 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
                   Devenir le festival de référence alliant sport d'hiver et musique électronique en Europe, reconnu pour son innovation technologique et son expérience client unique.
                 </p>
                 <div className="flex items-center">
-                  <Users className={isDayMode ? 'text-day-turquoise' : 'text-night-pink'} size={20} />
+                  <Users className={isDayMode ? 'text-day-turquoise' : 'text-night-pink'} size={20} aria-hidden="true" />
                   <span className={`ml-2 ${
                     isDayMode ? 'text-day-gray' : 'text-white/80'
                   }`}>
@@ -85,7 +89,7 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
             }`}>
               L'expérience Snow Pulse
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-4" role="list">
               {[
                 "Compétitions de ski et snowboard freestyle de jour",
                 "Soirées électro avec artistes internationaux de nuit",
@@ -97,10 +101,11 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
                   className={`flex items-start ${
                     isDayMode ? 'text-day-gray' : 'text-white/80'
                   }`}
+                  role="listitem"
                 >
                   <div className={`mr-3 mt-1 min-w-4 ${
                     isDayMode ? 'text-day-turquoise' : 'text-night-pink'
-                  }`}>
+                  }`} aria-hidden="true">
                     •
                   </div>
                   <span>{item}</span>
@@ -109,11 +114,12 @@ const ConceptSection: React.FC<ConceptSectionProps> = ({ isDayMode }) => {
             </ul>
             <a 
               href="#program" 
-              className={`inline-block px-6 py-3 rounded-md transition-all duration-300 ${
+              className={`inline-block px-6 py-3 rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                 isDayMode 
-                  ? 'bg-day-turquoise text-white hover:bg-day-blue' 
-                  : 'bg-night-pink text-white hover:bg-night-purple'
+                  ? 'bg-day-turquoise text-white hover:bg-day-blue focus:ring-day-turquoise' 
+                  : 'bg-night-pink text-white hover:bg-night-purple focus:ring-night-pink'
               }`}
+              aria-label="Consulter le programme détaillé du festival"
             >
               Voir le programme
             </a>
@@ -140,12 +146,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, isD
           ? 'bg-gradient-to-br from-white to-day-blue/5 shadow-md' 
           : 'bg-gradient-to-br from-night-blue to-night-purple/10 shadow-md'
       }`}
+      role="listitem"
     >
       <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
         isDayMode 
           ? 'bg-day-turquoise/10 text-day-turquoise' 
           : 'bg-night-pink/10 text-night-pink'
-      }`}>
+      }`} aria-hidden="true">
         {icon}
       </div>
       <h3 className={`font-medium text-xl mb-2 ${

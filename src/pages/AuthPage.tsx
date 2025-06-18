@@ -56,13 +56,14 @@ const AuthPage: React.FC = () => {
       <Button
         onClick={() => navigate('/')}
         variant="ghost"
-        className="absolute top-4 left-4 text-slate-300 hover:text-white hover:bg-slate-700/50"
+        className="absolute top-4 left-4 text-slate-300 hover:text-white hover:bg-slate-700/50 focus:outline-none focus:ring-2 focus:ring-slate-400"
+        aria-label="Retourner à la page d'accueil"
       >
-        <ArrowLeft className="h-4 w-4 mr-2" />
+        <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
         Retour à l'accueil
       </Button>
 
-      <div className="bg-slate-800/50 backdrop-blur-md p-8 rounded-xl shadow-2xl w-full max-w-md">
+      <main className="bg-slate-800/50 backdrop-blur-md p-8 rounded-xl shadow-2xl w-full max-w-md" role="main">
         <h1 className="text-3xl font-bold text-center mb-2">
           {getTitle()}
         </h1>
@@ -75,12 +76,13 @@ const AuthPage: React.FC = () => {
         <div className="mt-6 text-center">
           <button
             onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
-            className="text-slate-300 hover:text-white underline"
+            className="text-slate-300 hover:text-white underline focus:outline-none focus:ring-2 focus:ring-slate-400 rounded px-2 py-1"
+            aria-label={mode === 'login' ? "Basculer vers le formulaire d'inscription" : "Basculer vers le formulaire de connexion"}
           >
             {mode === 'login' ? "Pas encore de compte ? S'inscrire" : 'Déjà un compte ? Se connecter'}
           </button>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
