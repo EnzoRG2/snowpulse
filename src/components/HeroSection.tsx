@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Snowflake } from 'lucide-react';
 
@@ -128,7 +129,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
         <div className="relative flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
           <a 
             href="#tickets" 
-            className={`px-8 py-4 rounded-md font-bold text-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 ${
+            className={`px-6 py-3 rounded-md font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 ${
               isDayMode 
                 ? 'bg-day-turquoise text-white hover:bg-day-blue' 
                 : 'bg-night-pink text-white hover:bg-night-purple'
@@ -143,7 +144,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isDayMode }) => {
           </a>
           <a 
             href="#program" 
-            className={`z-10 px-8 py-4 rounded-md font-bold text-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 backdrop-blur-sm ${
+            className={`z-10 px-6 py-3 rounded-md font-bold text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 backdrop-blur-sm ${
               isDayMode 
                 ? 'text-gray-700 hover:text-night-blue border-2 border-gray-600 hover:border-night-blue bg-white/20 hover:bg-white/30' 
                 : 'text-gray-200 hover:text-white border-2 border-gray-300 hover:border-white bg-black/20 hover:bg-black/30'
